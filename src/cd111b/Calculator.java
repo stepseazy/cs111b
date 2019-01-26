@@ -1,4 +1,4 @@
-package adder;
+package cd111b;
 import java.util.Scanner;
 import java.lang.Math;
 
