@@ -7,8 +7,14 @@ import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
+	private Pane loadMainPane(String path) throws IOException{
+		FXMLLoader loader=new FXMLLoader();
+		Pane mainPane=(Pane)loader.load(getClass().getResourceAsStream(path));
+		return mainPane;
+	}
 	@Override
 	public void start(Stage primaryStage) {
+		
 		try {
 			BorderPane root = new BorderPane();
 			Scene scene = new Scene(root,400,400);
