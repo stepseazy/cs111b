@@ -14,7 +14,6 @@ public class Palindrome<T> extends Reverse<T> {
 
 	public Palindrome(T obj) {
 		super(obj);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public boolean isPalindrome() {
