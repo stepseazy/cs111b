@@ -1,62 +1,150 @@
 package palindrome;
 
+enum types{
+	STRING, INT_ARRAY;
+}
+
 public class Reverse<T> {
+	private types type;
+	private String originalString;
+	private String reverseString;
+	private int[] originalArray;
+	private int[] reverseArray;
 
-	T original;
-	T reverse;
-
-	public Reverse(T o) {
+	public types getType() {
+		return type;
+	}
+	
+	public Reverse(T obj) {
 		try {
-			copy(o);
-			reverse(o);
+			getType(obj);
+			copy(obj);
+			reverse(obj);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public void getType(T obj) throws Exception {
+		String temp=obj.getClass().getName();
+		switch(temp) {
+		case "[I":
+			type=types.INT_ARRAY;
+			break;
+		case "java.lang.String":
+			type=types.STRING;
+			break;
+		default: 
+			throw new Exception("this type not supported by reverse class");
+		}
+			
+	}
 
-	public void copy(T o) throws Exception {
-		if (o instanceof String) {
-			original = o;
-		} else if (o instanceof Integer[]) {
-			int length = ((Integer[]) o).length;
-			Integer[] temp = new Integer[length];
-			original = (T) temp;
+	public void copy(T obj) {
+		switch(getType()) {
+		case INT_ARRAY:
+			int length = ((int[]) obj).length;
+			setOriginalArray(new int[length]);
 			for (int i = 0; i < length; i++) {
-				((Integer[]) original)[i] = ((Integer[]) o)[i];
+				getOriginalArray()[i] = ((int[]) obj)[i];
 			}
-		} else {
-			throw new Exception("this type not supported");
+			break;
+		case STRING:
+			setOriginalString((String)obj);
+			break;
+		default:
+			break;
 		}
 	}
 
-	public void reverse(T o) {
-		if (o instanceof String) {
-			String temp = "";
-			int length = ((String) o).length();
+	public void reverse(T obj) {
+		int length;
+		switch(getType()) {
+		case INT_ARRAY:
+			length=getOriginalArray().length;
+			setReverseArray(new int[length]);
+			for (int i = 0; i <length ; i++) {
+				getReverseArray()[i] = getOriginalArray()[length - i - 1];
+			}
+			break;
+		case STRING:
+			setReverseString("");
+			length = ((String) obj).length();
 			for (int i = 0; i < length; i++) {
-				temp += ((String) original).charAt(length - i - 1);
+				setReverseString(getReverseString() + ((String) getOriginalString()).charAt(length - i - 1));
 			}
-			reverse = (T) temp;
-		} else if (o instanceof Integer[]) {
-			for (int i = 0; i < ((Integer[]) o).length; i++) {
-				((Integer[]) reverse)[i] = ((Integer[]) original)[i];
-			}
+			break;
+		default:
+			break;
 		}
 	}
 
+	public static void printArray(int[] a) {
+		int length=a.length;
+		for (int i = 0; i < length; i++) {
+			System.out.print(a[i]+" ");
+		}
+		System.out.println("");
+	}
+
+	
 	public void print() {
-		if (original instanceof String) {
-			System.out.println(original);
-			System.out.println(reverse);
-		} else if (original instanceof Integer[]) {
-			for (int i = 0; i < ((Integer[]) original).length; i++) {
-				System.out.println(((Integer[]) original)[i]);
-			}
-			for (int i = 0; i < ((Integer[]) reverse).length; i++) {
-				System.out.println(((Integer[]) reverse)[i]);
-			}
+		switch(getType()) {
+		case INT_ARRAY:
+			System.out.println("Original: ");
+			printArray(getOriginalArray());
+			System.out.println("Reversed: ");
+			printArray(getReverseArray());
+			break;
+		case STRING:
+			System.out.println("Original: ");
+			System.out.println(getOriginalString());
+			System.out.println("Reversed: ");
+			System.out.println(getReverseString());
+			break;
+		default:
+			break;
 		}
+	}
+
+
+	protected String getOriginalString() {
+		return originalString;
+	}
+
+
+	private void setOriginalString(String originalString) {
+		this.originalString = originalString;
+	}
+
+
+	protected String getReverseString() {
+		return reverseString;
+	}
+
+
+	private void setReverseString(String reverseString) {
+		this.reverseString = reverseString;
+	}
+
+
+	protected int[] getOriginalArray() {
+		return originalArray;
+	}
+
+
+	private void setOriginalArray(int[] originalArray) {
+		this.originalArray = originalArray;
+	}
+
+
+	protected int[] getReverseArray() {
+		return reverseArray;
+	}
+
+
+	private void setReverseArray(int[] reverseArray) {
+		this.reverseArray = reverseArray;
 	}
 
 }
