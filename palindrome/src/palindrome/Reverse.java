@@ -1,6 +1,6 @@
 package palindrome;
 
-enum types{
+enum types {
 	STRING, INT_ARRAY;
 }
 
@@ -14,7 +14,7 @@ public class Reverse<T> {
 	public types getType() {
 		return type;
 	}
-	
+
 	public Reverse(T obj) {
 		try {
 			getType(obj);
@@ -24,24 +24,24 @@ public class Reverse<T> {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void getType(T obj) throws Exception {
-		String temp=obj.getClass().getName();
-		switch(temp) {
+		String temp = obj.getClass().getName();
+		switch (temp) {
 		case "[I":
-			type=types.INT_ARRAY;
+			type = types.INT_ARRAY;
 			break;
 		case "java.lang.String":
-			type=types.STRING;
+			type = types.STRING;
 			break;
-		default: 
+		default:
 			throw new Exception("this type not supported by reverse class");
 		}
-			
+
 	}
 
 	public void copy(T obj) {
-		switch(getType()) {
+		switch (getType()) {
 		case INT_ARRAY:
 			int length = ((int[]) obj).length;
 			setOriginalArray(new int[length]);
@@ -50,7 +50,7 @@ public class Reverse<T> {
 			}
 			break;
 		case STRING:
-			setOriginalString((String)obj);
+			setOriginalString((String) obj);
 			break;
 		default:
 			break;
@@ -59,11 +59,11 @@ public class Reverse<T> {
 
 	public void reverse(T obj) {
 		int length;
-		switch(getType()) {
+		switch (getType()) {
 		case INT_ARRAY:
-			length=getOriginalArray().length;
+			length = getOriginalArray().length;
 			setReverseArray(new int[length]);
-			for (int i = 0; i <length ; i++) {
+			for (int i = 0; i < length; i++) {
 				getReverseArray()[i] = getOriginalArray()[length - i - 1];
 			}
 			break;
@@ -80,16 +80,15 @@ public class Reverse<T> {
 	}
 
 	public static void printArray(int[] a) {
-		int length=a.length;
+		int length = a.length;
 		for (int i = 0; i < length; i++) {
-			System.out.print(a[i]+" ");
+			System.out.print(a[i] + " ");
 		}
 		System.out.println("");
 	}
 
-	
 	public void print() {
-		switch(getType()) {
+		switch (getType()) {
 		case INT_ARRAY:
 			System.out.println("Original: ");
 			printArray(getOriginalArray());
@@ -107,41 +106,33 @@ public class Reverse<T> {
 		}
 	}
 
-
 	protected String getOriginalString() {
 		return originalString;
 	}
-
 
 	private void setOriginalString(String originalString) {
 		this.originalString = originalString;
 	}
 
-
 	protected String getReverseString() {
 		return reverseString;
 	}
-
 
 	private void setReverseString(String reverseString) {
 		this.reverseString = reverseString;
 	}
 
-
 	protected int[] getOriginalArray() {
 		return originalArray;
 	}
-
 
 	private void setOriginalArray(int[] originalArray) {
 		this.originalArray = originalArray;
 	}
 
-
 	protected int[] getReverseArray() {
 		return reverseArray;
 	}
-
 
 	private void setReverseArray(int[] reverseArray) {
 		this.reverseArray = reverseArray;
