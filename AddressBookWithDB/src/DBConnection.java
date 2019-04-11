@@ -194,7 +194,6 @@ public class DBConnection {
 		Statement stmt = null;
 
 		String query = "select ID, NAME, ADDRESS, PHONE from " + DB_TABLE_NAME + " WHERE NAME='" + name + "';";
-		System.out.println(query);
 		try {
 			stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
