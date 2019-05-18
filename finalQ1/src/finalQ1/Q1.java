@@ -24,7 +24,7 @@ public class Q1 {
 
 	static void factorial(int n) {
 		numArray = new ArrayList<Integer>();
-		numArray.add(1); // adds 1 to the end
+		numArray.add(1); // start with 1
 
 		for (int i = 1; i <= n; i++)
 			multiply(i);
